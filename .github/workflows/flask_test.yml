@@ -28,7 +28,7 @@ jobs:
       #say we're setting up .NET, Vue and whatever else
       matrix:
         #can be multiple versions
-        python-version: [3.10]
+        python-version: '3.10'
 
     #environment variables, both encrypted (GitHub secrets) and otherwise
     env:
