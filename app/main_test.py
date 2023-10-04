@@ -1,5 +1,6 @@
 from main import return_backwards_string, get_mode
 import unittest
+from unittest import TestCase
 import os
 
 
