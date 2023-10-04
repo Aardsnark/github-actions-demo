@@ -1,0 +1,59 @@
+
+# ---- CONFIGURATION ----
+
+name: Flask App Tests
+
+#on defines triggers
+on:
+  pull_request:
+    #can also use Regex expressions
+    branches:
+      - main
+
+jobs:
+  #can specify multiple jobs, each with their own steps (dependant)
+  #"test" is arbitrary
+  test:
+    # can be an array of versions if multiple
+    runs-on: ubuntu-latest
+    defaults:
+      #pre-pend the directory where all or some of the
+      #test scripts are
+      run:
+        working-directory: ./app/
+
+    #specify on what language the tests are run
+    strategy:
+      #can have multiple arrays of version
+      #say we're setting up .NET, Vue and whatever else
+      matrix:
+        #can be multiple versions
+        python-version: [3.10]
+
+    #environment variables, both encrypted (GitHub secrets) and otherwise
+    env:
+      MODE: "dev"
+
+#---- WORKFLOW STEPS ----
+
+    steps:
+      #one of the pre-written scripts that sets up working env
+      - uses: actions/checkout@v3
+
+      - name: Set up Pyton on Server
+        uses: actions/setup-python@v4
+        with:
+          #runs the step for every python version in the array
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies on Server
+        run: |
+          python - m install --upgrade pip
+          pip install -r ../requirements.txt
+
+      - name: Test App Code
+        run: python ./main_test.py
+
+
+
+
