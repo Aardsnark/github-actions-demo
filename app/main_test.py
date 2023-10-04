@@ -12,5 +12,6 @@ class TestMain(unittest.TestCase):
     def test_get_env(self):
         self.assertEqual(os.environ.get("MODE"), get_mode())
 
+
 if __name__ == "__main__":
     unittest.main()

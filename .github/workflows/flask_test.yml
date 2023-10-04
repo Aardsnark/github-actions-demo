@@ -32,7 +32,7 @@ jobs:
 
     #environment variables, both encrypted (GitHub secrets) and otherwise
     env:
-      MODE: "dev"
+      MODE: ${{ secrets.MODE }}
 
 #---- WORKFLOW STEPS ----
 
